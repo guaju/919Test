@@ -7,16 +7,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.guaju.a919test.list.MainActivity">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <include
+            android:id="@+id/jing"
+            layout="@layout/item_menu"
+            android:visibility="invisible"
+            />
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
         android:overScrollMode="never"
          />
-</LinearLayout>
+    </FrameLayout>
+    </LinearLayout>

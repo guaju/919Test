@@ -25,7 +25,8 @@ import butterknife.ButterKnife;
 public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     final int TYPE_VP = 100;
     final int TYPE_FIX = 101;
-    final int TYPE_NORMAL = 102;
+    final int TYPE_MENU = 102;
+    final int TYPE_NORMAL = 103;
     //声明一个imageview的集合
     ArrayList<ImageView>  imageLists=new ArrayList<>();
     Context context;
@@ -51,9 +52,13 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 View view2 = inflater.inflate(R.layout.item_fix, null, false);
                  vh = new FixedViewHolder(view2);
                 break;
+            case TYPE_MENU:
+                View view3 = inflater.inflate(R.layout.item_menu,parent, false);
+                vh = new MenuViewHolder(view3);
+                break;
             case TYPE_NORMAL:
-                View view3 = inflater.inflate(R.layout.item_list, null, false);
-                vh =new NormalViewHolder(view3);
+                View view4 = inflater.inflate(R.layout.item_list, null, false);
+                vh =new NormalViewHolder(view4);
                 break;
         }
        return vh;
@@ -75,17 +80,20 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
               FixedViewHolder fHolder = (FixedViewHolder) holder;
               DetailBean detailBean = (DetailBean) list.get(1);
               fHolder.setContent(detailBean);
+          }else if (holder instanceof  MenuViewHolder){
+              MenuViewHolder mHolder=(MenuViewHolder)holder;
+              //TODO SOMETHING
           }
           else{
               NormalViewHolder nHolder = (NormalViewHolder) holder;
               ArrayList<String> lists = (ArrayList<String>) list.get(2);
-              nHolder.setContent(lists,position-2);  //去除前面两个的位置
+              nHolder.setContent(lists,position-3);  //去除前面两个的位置
           }
     }
     @Override
     public int getItemCount() {
         ArrayList<String> lists = (ArrayList<String>) list.get(2);
-        return 2+ lists.size();//总长度
+        return 3+ lists.size();//总长度
     }
     @Override
     public int getItemViewType(int position) {
@@ -93,7 +101,10 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return TYPE_VP;
         } else if (position == 1) {
             return TYPE_FIX;
-        } else {
+        }else if (position==2){
+            return TYPE_MENU;
+        }
+        else {
             return TYPE_NORMAL;
         }
 
@@ -170,5 +181,22 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
     }
+    public static class MenuViewHolder extends RecyclerView.ViewHolder{
+        @BindView(R.id.price)
+        TextView price;
+        @BindView(R.id.distance)
+        TextView distance;
+        @BindView(R.id.all)
+        TextView all;
+
+
+        public MenuViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this,itemView);
+        }
+
+
+    }
+
 
 }

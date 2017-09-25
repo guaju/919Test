@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fix_size">100dp</dimen>
+    <dimen name="textitem_size">30dp</dimen>
+    <dimen name="vp_size">150dp</dimen>
+
+</resources>
