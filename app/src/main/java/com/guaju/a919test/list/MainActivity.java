@@ -18,6 +18,7 @@ public class MainActivity extends BaseActivity implements ListContract.View {
     RecyclerView recyclerview;
     @BindView(R.id.jing)
     View jing;
+    int temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class MainActivity extends BaseActivity implements ListContract.View {
     }
 
     public void setScrollListener(RecyclerView rv){
+        final int up_size = getResources().getDimensionPixelSize(R.dimen.up_size);
         rv.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -49,8 +51,10 @@ public class MainActivity extends BaseActivity implements ListContract.View {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                Log.e(TAG, "upsize="+180+"dy="+dy);
-               if (dy>=180){
+
+                temp+=dy;
+                Log.e(TAG, "upsize="+up_size+"dy="+temp);
+               if (temp>=up_size){
                    jing.setVisibility(View.VISIBLE);
                }else{
 
